@@ -1,0 +1,3 @@
+rootProject.name = 'cryptoDash'
+
+include ':app'
