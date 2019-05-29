@@ -12,9 +12,7 @@ class ChartBar extends Component {
   }
 
   render() {
-    console.log(this.state.data);
     const data = this.state.data;
-    // const data = [12, 43, 53, 76, 12, 39];
 
     const CUT_OFF = 20;
     const Labels = ({ x, y, bandwidth, data }) =>

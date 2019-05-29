@@ -21,14 +21,12 @@ class ChartLine extends Component {
   }
 
   render() {
-    console.log(this.state.data);
     const axesSvg = { fontSize: 10, fill: "#b971f7" };
     const verticalContentInset = { top: 10, bottom: 10 };
     const xAxisHeight = 30;
 
-    // const data = [544, 422, 232, 422, 554, 876, 908];
     return (
-      <View style={{ height: 200, padding: 20, flexDirection: "row" }}>
+      <View style={{ height: 350, padding: 20, flexDirection: "row" }}>
         <YAxis
           data={this.state.data.reverse()}
           style={{ marginBottom: xAxisHeight }}
