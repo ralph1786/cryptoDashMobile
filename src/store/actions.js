@@ -1,10 +1,17 @@
 import axios from "axios";
 import { secondApiKey } from "../../constant";
 
-const loadCurrencies = currencies => {
+const loadCurrencies = listCurrencies => {
   return {
     type: "ALL_CURRENCIES",
-    payload: currencies
+    payload: listCurrencies
+  };
+};
+
+export const selectedCurrency = currency => {
+  return {
+    type: "SELECTED_CURRENCY",
+    payload: currency
   };
 };
 
@@ -15,7 +22,6 @@ export const fetchCurrencies = () => {
       .then(res => {
         const listCurrencies = res.data.slice(0, 6);
         dispatch(loadCurrencies(listCurrencies));
-        // debugger;
       })
       .catch(err => console.log(err));
   };
