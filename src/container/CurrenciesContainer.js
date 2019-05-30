@@ -1,16 +1,41 @@
 import React, { Component } from "react";
-import { Container, Content } from "native-base";
-import { View } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import CryptoCard from "../components/CryptoCard";
+import { connect } from "react-redux";
+import { fetchCurrencies } from "../store/actions";
 
 class CurrenciesContainer extends Component {
+  componentDidMount() {
+    this.props.fetchCurrencies();
+  }
+
   render() {
-    return (
-      <View>
-        <CryptoCard currency="Bitcoin" />
-      </View>
-    );
+    // console.log("from c-container", this.props.componentId);
+    const arrayCurrencies = this.props.currencies.map((currency, index) => (
+      <CryptoCard
+        key={index}
+        currency={currency}
+        componentId={this.props.componentId}
+      />
+    ));
+
+    return <View>{arrayCurrencies}</View>;
   }
 }
 
-export default CurrenciesContainer;
+const mapStateToProps = state => {
+  return {
+    currencies: state.currencies
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchCurrencies: () => dispatch(fetchCurrencies())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CurrenciesContainer);
