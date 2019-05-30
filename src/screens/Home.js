@@ -1,41 +1,26 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Header,
-  Left,
-  Body,
-  Right,
-  Button,
-  Icon,
-  Title,
-  Content
-} from "native-base";
 import CurrenciesContainer from "../container/CurrenciesContainer";
 import { connect } from "react-redux";
-import { fetchCurrencies } from "../store/actions";
+import { View, Button } from "react-native";
+import { Navigation } from "react-native-navigation";
 
 class HomeScreen extends Component {
-  componentDidMount() {
-    this.props.fetchCurrencies();
+  static get options() {
+    return {
+      topBar: {
+        title: {
+          text: "Home",
+          color: "blue"
+        }
+      }
+    };
   }
   render() {
+    console.log(this.props.componentId);
     return (
-      <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name="menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Home</Title>
-          </Body>
-          <Right />
-        </Header>
-        <Content>
-          <CurrenciesContainer />
-        </Content>
-      </Container>
+      <View>
+        <CurrenciesContainer componentId={this.props.componentId} />
+      </View>
     );
   }
 }
@@ -46,13 +31,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchCurrencies: () => dispatch(fetchCurrencies())
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeScreen);
+export default connect(mapStateToProps)(HomeScreen);
