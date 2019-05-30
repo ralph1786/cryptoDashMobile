@@ -5,30 +5,53 @@ import {
   Left,
   Body,
   Right,
-  Button,
   Icon,
   Title,
   Content
 } from "native-base";
+import { connect } from "react-redux";
+import { View, Text, StyleSheet, Button } from "react-native";
+import CryptoCard from "../components/CryptoCard";
+import ChartContainer from "../container/ChartContainer";
 
 class DashboardScreen extends Component {
   render() {
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name="menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Dashboard</Title>
-          </Body>
-          <Right />
-        </Header>
-        <Content />
+        <Content>
+          <View>
+            {this.props.selectedCurrency === null ? null : (
+              <CryptoCard currency={this.props.selectedCurrency} />
+            )}
+          </View>
+          <View>
+            {this.props.selectedCurrency === null ? (
+              <Text style={styles.messageStyling}>
+                Please Select A Currency
+              </Text>
+            ) : (
+              <ChartContainer />
+            )}
+          </View>
+        </Content>
       </Container>
     );
   }
 }
-export default DashboardScreen;
+
+const styles = StyleSheet.create({
+  messageStyling: {
+    marginLeft: "20%",
+    marginTop: "40%",
+    fontSize: 18,
+    color: "blue"
+  }
+});
+
+const mapStateToProps = state => {
+  return {
+    selectedCurrency: state.selectedCurrency
+  };
+};
+
+export default connect(mapStateToProps)(DashboardScreen);
