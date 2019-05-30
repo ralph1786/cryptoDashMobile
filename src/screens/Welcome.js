@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, Button, StyleSheet } from "react-native";
 import navigationTabs from "../navigation/navigationTabs";
+import FadeInAnimation from "../components/FadeInAnimation";
 
 class WelcomeScreen extends Component {
   proceedHandler = () => {
@@ -10,8 +11,10 @@ class WelcomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Welcome to CryptoDash</Text>
-        <Button title="Proceed" onPress={this.proceedHandler} />
+        <FadeInAnimation>
+          <Text>Welcome to CryptoDash</Text>
+          <Button title="Proceed" onPress={this.proceedHandler} />
+        </FadeInAnimation>
       </View>
     );
   }
