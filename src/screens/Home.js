@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import CurrenciesContainer from "../container/CurrenciesContainer";
-import { connect } from "react-redux";
-import { View, Button } from "react-native";
-import { Navigation } from "react-native-navigation";
+import { View } from "react-native";
 
 class HomeScreen extends Component {
   static get options() {
@@ -16,7 +14,6 @@ class HomeScreen extends Component {
     };
   }
   render() {
-    console.log(this.props.componentId);
     return (
       <View>
         <CurrenciesContainer componentId={this.props.componentId} />
@@ -25,10 +22,4 @@ class HomeScreen extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currencies: state.currencies
-  };
-};
-
-export default connect(mapStateToProps)(HomeScreen);
+export default HomeScreen;
