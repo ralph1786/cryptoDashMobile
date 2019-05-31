@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, ActivityIndicator, StyleSheet } from "react-native";
 import CryptoCard from "../components/CryptoCard";
 import { connect } from "react-redux";
 import { fetchCurrencies } from "../store/actions";
@@ -10,7 +10,6 @@ class CurrenciesContainer extends Component {
   }
 
   render() {
-    // console.log("from c-container", this.props.componentId);
     const arrayCurrencies = this.props.currencies.map((currency, index) => (
       <CryptoCard
         key={index}
@@ -19,13 +18,24 @@ class CurrenciesContainer extends Component {
       />
     ));
 
-    return <View>{arrayCurrencies}</View>;
+    return (
+      <View>
+        {this.props.isLoading ? (
+          <View style={styles.indicator}>
+            <ActivityIndicator size="large" color="blue" />
+          </View>
+        ) : (
+          arrayCurrencies
+        )}
+      </View>
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    currencies: state.currencies
+    currencies: state.currencies,
+    isLoading: state.isLoading
   };
 };
 
@@ -34,6 +44,12 @@ const mapDispatchToProps = dispatch => {
     fetchCurrencies: () => dispatch(fetchCurrencies())
   };
 };
+
+const styles = StyleSheet.create({
+  indicator: {
+    marginTop: "50%"
+  }
+});
 
 export default connect(
   mapStateToProps,
