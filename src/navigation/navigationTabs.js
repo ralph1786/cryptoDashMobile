@@ -1,42 +1,7 @@
 import { Navigation } from "react-native-navigation";
 import homeIcon from "../assets/icons/homeicon.png";
 import dashboardIcon from "../assets/icons/dashboard.png";
-
-// const navigationTabs = () => {
-//   Navigation.setRoot({
-//     root: {
-//       bottomTabs: {
-//         id: "BottomTabsId",
-//         children: [
-//           {
-//             component: {
-//               name: "cryptoDash-home",
-//               options: {
-//                 bottomTab: {
-//                   fontSize: 12,
-//                   text: "Home",
-//                   icon: homeIcon
-//                 }
-//               }
-//             }
-//           },
-//           {
-//             component: {
-//               name: "cryptoDash-dashboard",
-//               options: {
-//                 bottomTab: {
-//                   text: "Dashboard",
-//                   fontSize: 12,
-//                   icon: dashboardIcon
-//                 }
-//               }
-//             }
-//           }
-//         ]
-//       }
-//     }
-//   });
-// };
+import newsIcon from "../assets/icons/news.png";
 
 const navigationTabs = () => {
   Navigation.setRoot({
@@ -68,6 +33,18 @@ const navigationTabs = () => {
                 bottomTab: {
                   text: "Dashboard",
                   icon: dashboardIcon
+                }
+              }
+            }
+          },
+          {
+            component: {
+              name: "cryptoDash-news",
+
+              options: {
+                bottomTab: {
+                  text: "News",
+                  icon: newsIcon
                 }
               }
             }
