@@ -1,16 +1,7 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Header,
-  Left,
-  Body,
-  Right,
-  Icon,
-  Title,
-  Content
-} from "native-base";
+import { Container, Content } from "native-base";
 import { connect } from "react-redux";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import CryptoCard from "../components/CryptoCard";
 import ChartContainer from "../container/ChartContainer";
 
@@ -42,9 +33,10 @@ class DashboardScreen extends Component {
 const styles = StyleSheet.create({
   messageStyling: {
     marginLeft: "20%",
-    marginTop: "40%",
-    fontSize: 18,
-    color: "blue"
+    marginTop: "50%",
+    fontSize: 22,
+    color: "blue",
+    fontFamily: "Noteworthy-Bold"
   }
 });
 
