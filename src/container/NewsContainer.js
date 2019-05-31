@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import { Text, View, FlatList, StyleSheet } from "react-native";
+import { View, FlatList, StyleSheet, RefreshControl } from "react-native";
 import axios from "axios";
 import { apiKey } from "../../constant";
 import NewsCard from "../components/NewsCard";
 
 class NewsContainer extends Component {
   state = {
-    articles: []
+    articles: [],
+    refreshing: false
   };
 
-  componentDidMount() {
+  fetchArticles = () => {
     axios
       .get(
         `https://min-api.cryptocompare.com/data/v2/news/?lang=EN&api_key=${apiKey}`
@@ -17,12 +18,25 @@ class NewsContainer extends Component {
       .then(res => {
         this.setState(
           {
-            articles: res.data.Data
+            articles: res.data.Data,
+            refreshing: false
           },
           () => console.log(this.state.articles)
         );
-      });
+      })
+      .catch(err => console.log(err));
+  };
+
+  componentDidMount() {
+    this.fetchArticles();
   }
+
+  onRefresh = () => {
+    this.setState({
+      refreshing: true
+    });
+    this.fetchArticles();
+  };
 
   render() {
     return (
@@ -30,6 +44,8 @@ class NewsContainer extends Component {
         <FlatList
           style={styles.flatListStyling}
           data={this.state.articles}
+          onRefresh={() => this.onRefresh()}
+          refreshing={this.state.refreshing}
           renderItem={({ item }) => (
             <NewsCard
               title={item.title}
