@@ -3,6 +3,7 @@ import { Navigation } from "react-native-navigation";
 import DashboardScreen from "./src/screens/Dashboard";
 import HomeScreen from "./src/screens/Home";
 import WelcomeScreen from "./src/screens/Welcome";
+import NewsScreen from "./src/screens/News";
 import storeConfig from "./src/store/storeConfig";
 import { Provider } from "react-redux";
 
@@ -28,6 +29,7 @@ Navigation.registerComponent(
   () => DashboardScreen
 );
 Navigation.registerComponent("cryptoDash-welcome", () => WelcomeScreen);
+Navigation.registerComponent("cryptoDash-news", () => NewsScreen);
 
 //Start screen for app
 Navigation.events().registerAppLaunchedListener(() => {
