@@ -17,7 +17,7 @@ class NewsScreen extends Component {
         <Header>
           <Left />
           <Body>
-            <Title>News</Title>
+            <Title style={{ color: "blue" }}>News</Title>
           </Body>
           <Right />
         </Header>
