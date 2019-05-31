@@ -1,6 +1,7 @@
 const initialState = {
   currencies: [],
-  selectedCurrency: null
+  selectedCurrency: null,
+  isLoading: true
 };
 
 export const currencyReducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ export const currencyReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedCurrency: action.payload
+      };
+    case "IS_LOADING":
+      return {
+        ...state,
+        isLoading: false
       };
     default:
       return state;

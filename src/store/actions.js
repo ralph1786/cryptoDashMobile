@@ -15,6 +15,12 @@ export const selectedCurrency = currency => {
   };
 };
 
+const isLoading = () => {
+  return {
+    type: "IS_LOADING"
+  };
+};
+
 export const fetchCurrencies = () => {
   return dispatch => {
     return axios
@@ -22,6 +28,7 @@ export const fetchCurrencies = () => {
       .then(res => {
         const listCurrencies = res.data.slice(0, 6);
         dispatch(loadCurrencies(listCurrencies));
+        dispatch(isLoading());
       })
       .catch(err => console.log(err));
   };
