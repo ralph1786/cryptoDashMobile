@@ -2,7 +2,18 @@ import React, { Component } from "react";
 import { View, ActivityIndicator, StyleSheet, FlatList } from "react-native";
 import CryptoCard from "../components/CryptoCard";
 import { connect } from "react-redux";
-import { fetchCurrencies } from "../store/actions";
+// import { fetchCurrencies } from "../store/actions";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+
+const CURRENCIES_QUERY = gql`
+  query CurrenciesQuery {
+    currencies {
+      currency
+      price
+    }
+  }
+`;
 
 class CurrenciesContainer extends Component {
   state = {
@@ -23,9 +34,9 @@ class CurrenciesContainer extends Component {
     );
   };
 
-  componentDidMount() {
-    this.props.fetchCurrencies();
-  }
+  // componentDidMount() {
+  //   this.props.fetchCurrencies();
+  // }
 
   renderItem = ({ item }) => (
     <CryptoCard
@@ -38,19 +49,29 @@ class CurrenciesContainer extends Component {
     console.log(this.props.currencies);
     return (
       <View>
-        {this.props.isLoading ? (
-          <View style={styles.indicator}>
-            <ActivityIndicator size="large" color="blue" />
-          </View>
-        ) : (
-          <FlatList
-            data={this.props.currencies}
-            renderItem={this.renderItem}
-            onRefresh={this.onRefresh}
-            refreshing={this.state.refreshing}
-            keyExtractor={item => item.currency}
-          />
-        )}
+        <Query query={CURRENCIES_QUERY} pollInterval={2000}>
+          {({ loading, error, data }) => {
+            if (loading) {
+              return (
+                <View style={styles.indicator}>
+                  <ActivityIndicator size="large" color="blue" />
+                </View>
+              );
+            }
+            if (error) console.log(error);
+
+            const slicedData = data.currencies.slice(0, 10);
+            return (
+              <FlatList
+                data={slicedData}
+                renderItem={this.renderItem}
+                onRefresh={this.onRefresh}
+                refreshing={this.state.refreshing}
+                keyExtractor={item => item.currency}
+              />
+            );
+          }}
+        </Query>
       </View>
     );
   }

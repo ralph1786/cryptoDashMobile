@@ -6,16 +6,23 @@ import WelcomeScreen from "./src/screens/Welcome";
 import NewsScreen from "./src/screens/News";
 import storeConfig from "./src/store/storeConfig";
 import { Provider } from "react-redux";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
 
 const store = storeConfig();
+const client = new ApolloClient({
+  uri: "http://localhost:4000/graphql"
+});
 
 //Screen Registration
 Navigation.registerComponent(
   "cryptoDash-home",
   () => props => (
-    <Provider store={store}>
-      <HomeScreen {...props} />
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <HomeScreen {...props} />
+      </Provider>
+    </ApolloProvider>
   ),
   () => HomeScreen
 );
