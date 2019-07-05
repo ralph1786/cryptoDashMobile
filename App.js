@@ -36,7 +36,15 @@ Navigation.registerComponent(
   () => DashboardScreen
 );
 Navigation.registerComponent("cryptoDash-welcome", () => WelcomeScreen);
-Navigation.registerComponent("cryptoDash-news", () => NewsScreen);
+Navigation.registerComponent(
+  "cryptoDash-news",
+  () => props => (
+    <ApolloProvider client={client}>
+      <NewsScreen {...props} />
+    </ApolloProvider>
+  ),
+  () => NewsScreen
+);
 
 //Start screen for app
 Navigation.events().registerAppLaunchedListener(() => {
