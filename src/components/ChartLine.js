@@ -11,7 +11,6 @@ class ChartLine extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    // console.log(nextProps);
     if (prevState.data !== nextProps.data) {
       return {
         data: nextProps.data
@@ -32,6 +31,7 @@ class ChartLine extends Component {
           style={{ marginBottom: xAxisHeight }}
           contentInset={verticalContentInset}
           svg={axesSvg}
+          formatLabel={value => `$${value}`}
         />
         <View style={{ flex: 1, marginLeft: 10 }}>
           <LineChart
@@ -49,8 +49,8 @@ class ChartLine extends Component {
           <XAxis
             style={{ marginHorizontal: -10, height: xAxisHeight }}
             data={this.props.data}
-            formatLabel={(value, index) => index}
-            contentInset={{ left: 10, right: 10 }}
+            formatLabel={value => `${value}D`}
+            contentInset={{ left: 15, right: 15 }}
             svg={axesSvg}
           />
         </View>

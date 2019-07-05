@@ -7,7 +7,7 @@ class ChartBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.data
+      data: this.props.dataBar
     };
   }
 
