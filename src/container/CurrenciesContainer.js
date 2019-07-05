@@ -34,10 +34,6 @@ class CurrenciesContainer extends Component {
     );
   };
 
-  // componentDidMount() {
-  //   this.props.fetchCurrencies();
-  // }
-
   renderItem = ({ item }) => (
     <CryptoCard
       key={item.id}
