@@ -1,23 +1,41 @@
 import React, { Component } from "react";
-import { View, ActivityIndicator, StyleSheet } from "react-native";
+import { View, ActivityIndicator, StyleSheet, FlatList } from "react-native";
 import CryptoCard from "../components/CryptoCard";
 import { connect } from "react-redux";
 import { fetchCurrencies } from "../store/actions";
 
 class CurrenciesContainer extends Component {
+  state = {
+    refreshing: false
+  };
+
+  onRefresh = () => {
+    this.setState(
+      {
+        refreshing: true
+      },
+      () => {
+        this.props.fetchCurrencies();
+        this.setState({
+          refreshing: false
+        });
+      }
+    );
+  };
+
   componentDidMount() {
     this.props.fetchCurrencies();
   }
 
+  renderItem = ({ item }) => (
+    <CryptoCard
+      key={item.id}
+      currency={item}
+      componentId={this.props.componentId}
+    />
+  );
   render() {
-    const arrayCurrencies = this.props.currencies.map((currency, index) => (
-      <CryptoCard
-        key={index}
-        currency={currency}
-        componentId={this.props.componentId}
-      />
-    ));
-
+    console.log(this.props.currencies);
     return (
       <View>
         {this.props.isLoading ? (
@@ -25,7 +43,13 @@ class CurrenciesContainer extends Component {
             <ActivityIndicator size="large" color="blue" />
           </View>
         ) : (
-          arrayCurrencies
+          <FlatList
+            data={this.props.currencies}
+            renderItem={this.renderItem}
+            onRefresh={this.onRefresh}
+            refreshing={this.state.refreshing}
+            keyExtractor={item => item.currency}
+          />
         )}
       </View>
     );
