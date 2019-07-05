@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, ActivityIndicator, StyleSheet, FlatList } from "react-native";
 import CryptoCard from "../components/CryptoCard";
 import { connect } from "react-redux";
-// import { fetchCurrencies } from "../store/actions";
+import { fetchCurrencies } from "../store/actions";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
@@ -42,7 +42,6 @@ class CurrenciesContainer extends Component {
     />
   );
   render() {
-    console.log(this.props.currencies);
     return (
       <View>
         <Query query={CURRENCIES_QUERY} pollInterval={2000}>
@@ -73,13 +72,6 @@ class CurrenciesContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currencies: state.currencies,
-    isLoading: state.isLoading
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     fetchCurrencies: () => dispatch(fetchCurrencies())
@@ -93,6 +85,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(CurrenciesContainer);
