@@ -26,7 +26,7 @@ export const fetchCurrencies = () => {
     return axios
       .get(`https://api.nomics.com/v1/currencies/ticker?key=${secondApiKey}`)
       .then(res => {
-        const listCurrencies = res.data.slice(0, 6);
+        const listCurrencies = res.data.slice(0, 10);
         dispatch(loadCurrencies(listCurrencies));
         dispatch(isLoading());
       })

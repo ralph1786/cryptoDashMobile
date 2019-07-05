@@ -4,7 +4,7 @@ const initialState = {
   isLoading: true
 };
 
-export const currencyReducer = (state = initialState, action) => {
+const currencyReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ALL_CURRENCIES":
       return {
