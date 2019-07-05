@@ -16,13 +16,10 @@ class NewsContainer extends Component {
         `https://min-api.cryptocompare.com/data/v2/news/?lang=EN&api_key=${apiKey}`
       )
       .then(res => {
-        this.setState(
-          {
-            articles: res.data.Data,
-            refreshing: false
-          },
-          () => console.log(this.state.articles)
-        );
+        this.setState({
+          articles: res.data.Data,
+          refreshing: false
+        });
       })
       .catch(err => console.log(err));
   };
@@ -32,10 +29,12 @@ class NewsContainer extends Component {
   }
 
   onRefresh = () => {
-    this.setState({
-      refreshing: true
-    });
-    this.fetchArticles();
+    this.setState(
+      {
+        refreshing: true
+      },
+      () => this.fetchArticles()
+    );
   };
 
   render() {
@@ -44,7 +43,7 @@ class NewsContainer extends Component {
         <FlatList
           style={styles.flatListStyling}
           data={this.state.articles}
-          onRefresh={() => this.onRefresh()}
+          onRefresh={this.onRefresh}
           refreshing={this.state.refreshing}
           renderItem={({ item }) => (
             <NewsCard

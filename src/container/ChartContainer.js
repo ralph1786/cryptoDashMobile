@@ -4,7 +4,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { apiKey } from "../../constant";
 import ChartLine from "../components/ChartLine";
-// import ChartBar from "./ChartBar";
+// import ChartBar from "../components/ChartBar";
 
 class ChartContainer extends Component {
   state = {
@@ -61,7 +61,7 @@ class ChartContainer extends Component {
     return (
       <View>
         <ChartLine data={this.state.data} />
-        {/* <ChartBar data={this.state.data} /> */}
+        {/* <ChartBar dataBar={this.state.data} /> */}
       </View>
     );
   }

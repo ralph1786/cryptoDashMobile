@@ -15,7 +15,7 @@ class WelcomeScreen extends Component {
       <ImageBackground
         source={backgroundImage}
         style={{ width: "100%", height: "100%" }}
-        imageStyle={{ opacity: 0.8 }}
+        imageStyle={{ opacity: 0.8, resizeMode: "stretch" }}
       >
         <View style={styles.container}>
           <FadeInAnimation>
