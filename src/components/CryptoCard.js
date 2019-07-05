@@ -37,7 +37,7 @@ class CryptoCard extends Component {
               {this.props.currency.currency}
             </Text>
             <Text style={styles.priceStyling}>
-              $ {this.props.currency.price.slice(0, 7)}
+              $ {this.props.currency.price.slice(0, 8)}
             </Text>
           </View>
         </FadeInAnimation>
@@ -48,17 +48,30 @@ class CryptoCard extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: "90%",
     padding: 10,
     margin: 5,
     backgroundColor: "#99c8f7",
     flexDirection: "row",
     alignItems: "center",
-    height: 90
+    height: 90,
+    borderRadius: 10,
+    marginLeft: 20
+  },
+  landscapeContainer: {
+    width: "60%",
+    padding: 10,
+    margin: 5,
+    backgroundColor: "red",
+    flexDirection: "row",
+    alignItems: "center",
+    height: 90,
+    borderRadius: 10,
+    marginLeft: 20
   },
   imageStyling: {
     width: 70,
-    height: 60,
+    height: 70,
     marginLeft: 20
   },
   textStyling: {
