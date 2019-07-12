@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Image, View, StyleSheet, TouchableOpacity, Text } from "react-native";
-import currencyImage from "./currencyImage";
+// import currencyImage from "./currencyImage";
 import { selectedCurrency } from "../store/actions";
 import { connect } from "react-redux";
 import FadeInAnimation from "./FadeInAnimation";
 import { Navigation } from "react-native-navigation";
+import SvgUri from "react-native-svg-uri";
 
 class CryptoCard extends Component {
   onPressHandler = () => {
@@ -25,20 +26,26 @@ class CryptoCard extends Component {
   };
 
   render() {
+    const { name, logo_url, currency, price } = this.props.currency;
+
+    //Function to distinguish between an svg or other file and use
+    //corresponding component.
+    const showLogo = logo => {
+      if (logo.split("").slice(-2, -1) == "v") {
+        return <SvgUri width="60" height="60" source={{ uri: logo }} />;
+      } else {
+        return <Image style={styles.imageStyling} source={{ uri: logo }} />;
+      }
+    };
     return (
       <TouchableOpacity onPress={() => this.onPressHandler()}>
         <FadeInAnimation>
           <View style={styles.container}>
-            <Image
-              style={styles.imageStyling}
-              source={{ uri: currencyImage(this.props.currency.currency) }}
-            />
+            {showLogo(logo_url)}
             <Text style={styles.textStyling}>
-              {this.props.currency.currency}
+              {name} ({currency})
             </Text>
-            <Text style={styles.priceStyling}>
-              $ {this.props.currency.price.slice(0, 8)}
-            </Text>
+            <Text style={styles.priceStyling}>$ {price.slice(0, 8)}</Text>
           </View>
         </FadeInAnimation>
       </TouchableOpacity>
@@ -70,15 +77,14 @@ const styles = StyleSheet.create({
     marginLeft: 20
   },
   imageStyling: {
-    width: 70,
-    height: 70,
-    marginLeft: 20
+    width: 60,
+    height: 60
   },
   textStyling: {
-    marginLeft: 30
+    marginLeft: 20
   },
   priceStyling: {
-    marginLeft: 40,
+    marginLeft: 10,
     color: "red"
   }
 });
