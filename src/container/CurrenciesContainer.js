@@ -11,6 +11,8 @@ const CURRENCIES_QUERY = gql`
     currencies {
       currency
       price
+      name
+      logo_url
     }
   }
 `;
@@ -44,7 +46,7 @@ class CurrenciesContainer extends Component {
   render() {
     return (
       <View>
-        <Query query={CURRENCIES_QUERY} pollInterval={2000}>
+        <Query query={CURRENCIES_QUERY} pollInterval={8000}>
           {({ loading, error, data }) => {
             if (loading) {
               return (
@@ -54,11 +56,9 @@ class CurrenciesContainer extends Component {
               );
             }
             if (error) console.log(error);
-
-            const slicedData = data.currencies.slice(0, 10);
             return (
               <FlatList
-                data={slicedData}
+                data={data.currencies}
                 renderItem={this.renderItem}
                 onRefresh={this.onRefresh}
                 refreshing={this.state.refreshing}
