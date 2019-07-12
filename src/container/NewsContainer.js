@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { View, FlatList, StyleSheet, ActivityIndicator } from "react-native";
-// import axios from "axios";
-// import { apiKey } from "../../constant";
 import NewsCard from "../components/NewsCard";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
