@@ -1,8 +1,10 @@
 # CryptoDashMobile
 
-Mobile Application for individuals interested in keeping tracking of the current value of the top crypto currencies on the market. It provides and displays historical price of those crypto currencies (last 10 days). Information is obtained through the use of two external APIs (nomics API, cryptocompare API).
+Mobile Application for individuals interested in keeping tracking of the current value of the top crypto currencies on the market. It provides and displays historical price of those crypto currencies (last 10 days). Information is obtained through the use of two external APIs (nomics API, cryptocompare API).In addition this application is implemented using a GraphQL server built with Express.js.
 
 ## Getting Started
+
+First clone the repository with the corresponding GraphQL server with the name of [cryptoDashGraphQLExpress](https://github.com/ralph1786/cryptoDashGraphQLExpress). The repository will have instructions how to get it started.
 
 To get the application up and running you must clone this project. Once you have opened this repository on your favorite text editor you must first run the following command on your terminal **npm install** to install all the dependencies for this project. Once everything is installed run this command on your terminal **react-native run-ios**. This will start the application Xcode simulator.
 
