@@ -46,7 +46,7 @@ class CurrenciesContainer extends Component {
   render() {
     return (
       <View>
-        <Query query={CURRENCIES_QUERY} pollInterval={8000}>
+        <Query query={CURRENCIES_QUERY} pollInterval={2000}>
           {({ loading, error, data }) => {
             if (loading) {
               return (
