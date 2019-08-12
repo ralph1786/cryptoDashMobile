@@ -8,6 +8,28 @@ import { Navigation } from "react-native-navigation";
 import SvgUri from "react-native-svg-uri";
 
 class CryptoCard extends Component {
+  state = {
+    price: this.props.currency.price,
+    priceIncrease: false
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.price !== nextProps.currency.price) {
+      if (prevState.price < nextProps.currency.price) {
+        return {
+          price: nextProps.currency.price,
+          priceIncrease: true
+        };
+      } else {
+        return {
+          price: nextProps.currency.price,
+          priceIncrease: false
+        };
+      }
+    }
+    return null;
+  }
+
   onPressHandler = () => {
     this.props.selectedCurrency(this.props.currency);
     Navigation.push(this.props.componentId, {
@@ -26,7 +48,7 @@ class CryptoCard extends Component {
   };
 
   render() {
-    const { name, logo_url, currency, price } = this.props.currency;
+    const { name, logo_url, currency } = this.props.currency;
 
     //Function to distinguish between an svg or other file and use
     //corresponding component.
@@ -45,7 +67,15 @@ class CryptoCard extends Component {
             <Text style={styles.textStyling}>
               {name} ({currency})
             </Text>
-            <Text style={styles.priceStyling}>$ {price.slice(0, 8)}</Text>
+            <Text
+              style={
+                this.state.priceIncrease
+                  ? styles.priceStylingIncrease
+                  : styles.priceStylingDecrease
+              }
+            >
+              $ {this.state.price.slice(0, 10)}
+            </Text>
           </View>
         </FadeInAnimation>
       </TouchableOpacity>
@@ -83,7 +113,11 @@ const styles = StyleSheet.create({
   textStyling: {
     marginLeft: 20
   },
-  priceStyling: {
+  priceStylingIncrease: {
+    marginLeft: 10,
+    color: "green"
+  },
+  priceStylingDecrease: {
     marginLeft: 10,
     color: "red"
   }
